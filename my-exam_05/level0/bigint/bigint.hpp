@@ -5,7 +5,7 @@
 
 class bigint {
     std::string s;
-    private :
+    public :
         bigint(unsigned int n = 0);
         bigint(const bigint &o);
         ~bigint();
@@ -14,20 +14,20 @@ class bigint {
         bigint &operator=(const bigint &o);
 
         //add
-        bigint operator+(const bigint &o)const;
+        bigint operator+(const bigint &o) const;
         bigint &operator+=(const bigint &o);
 
         //incr
         bigint operator++(int);
         bigint &operator++();
 
-        //with n
-        bigint operator<<(unsigned int n)const;
-        bigint operator<<=(unsigned int n);
+        //with num
+        bigint operator<<(unsigned int n) const;
+        bigint &operator<<=(unsigned int n);
 
         //with obj
         bigint operator>>(const bigint &o)const;
-        bigint operator>>=(const bigint &o);
+        bigint &operator>>=(const bigint &o);
 
         //bool
         bool operator<(const bigint &o)const;
