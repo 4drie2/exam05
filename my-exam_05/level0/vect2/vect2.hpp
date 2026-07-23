@@ -1,61 +1,41 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   vect2.hpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: fatkeski <fatkeski@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/28 18:20:54 by fatkeski          #+#    #+#             */
-/*   Updated: 2025/08/01 21:14:17 by fatkeski         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef VECT2_HPP
-#define VECT2_HPP
+#pragma once
 
 #include <iostream>
 
-class vect2
-{
-	private:
-		int x;
-		int y;
-	public:
-		vect2();
-		vect2(int num1, int num2);
-		vect2(const vect2& source);
-		vect2& operator=(const vect2& source);
+class vect2{
+	int _x;
+	int _y;
+	public :
+		vect2(int x = 0, int y = 0) : _x(x), _y(y) {};
+		vect2(const vect2 &o) : _x(o._x), _y(o._y) {};
+		vect2 &operator=(const vect2 &o);
 
-		int operator[](int index) const;
-		int& operator[](int index); // NON-COST
+		//access
+		int operator[](int i) const;
+		int &operator[](int i);
+
+		//increment & decrement
+		vect2 operator++(int);
+		vect2 &operator++();
+		vect2 operator--(int);
+		vect2 &operator--();
+		
+		// maths
+		vect2 operator+(const vect2 &o) const;
+		vect2 &operator+=(const vect2 &o);
+
+		vect2 operator-(const vect2 &o) const;
+		vect2 &operator-=(const vect2 &o);
+
+		vect2 operator*(int scalar)const ;
+		vect2 &operator*=(int scalar);
 
 		vect2 operator-() const;
-		vect2 operator*(int num) const;
 
-		vect2& operator*=(int num);
-
-		vect2& operator+=(const vect2& obj);
-		vect2& operator-=(const vect2& obj);
-		vect2& operator*=(const vect2& obj);
-
-		vect2 operator+(const vect2& obj) const;
-		vect2 operator-(const vect2& obj) const;
-		vect2 operator*(const vect2& obj) const;
-
-		vect2& operator++();
-		vect2 operator++(int);
-		vect2& operator--();
-		vect2 operator--(int);
-
-		bool operator==(const vect2& obj) const;
-		bool operator!=(const vect2& obj) const;
-
-		~vect2();
+		//bool
+		bool operator==(const vect2 &o) const;
+		bool operator!=(const vect2 &o) const;
 };
 
-vect2 operator*(int num, const vect2& obj);
-
-std::ostream& operator<<(std::ostream& os,const vect2& obj);
-
-#endif
-
+vect2 operator*(int scalar, const vect2 &o);
+std::ostream &operator<<(std::ostream &os, const vect2 &o);
