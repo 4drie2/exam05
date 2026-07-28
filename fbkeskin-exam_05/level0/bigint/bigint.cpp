@@ -345,4 +345,4 @@ bool bigint::operator>=(const bigint &o) const { return !(*this < o); }
 bool bigint::operator==(const bigint &o) const { return s == o.s; }
 bool bigint::operator!=(const bigint &o) const { return s != o.s; }
 
-std::ostream &operator<<(std::ostream &os, const bigint &n) { return os << n.str(); }
+std::ostream &operator<<(std::ostream &os, const bigint &o) { return os << o.str(); }

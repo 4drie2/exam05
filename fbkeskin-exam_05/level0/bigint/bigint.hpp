@@ -101,4 +101,4 @@ class bigint{
 		bool operator==(const bigint &o) const;
 		bool operator!=(const bigint &o) const;
 };
-std::ostream &operator<<(std::ostream &os, const bigint &n);
+std::ostream &operator<<(std::ostream &os, const bigint &o);
