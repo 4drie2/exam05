@@ -259,9 +259,10 @@
 
 #include "bigint.hpp"
 
-bigint::bigint(unsigned int n) {
-	if (!n) s = "0";
-	while (n) {
+bigint::bigint(unsigned int n){
+	if (!n)
+		s = "0";
+	while (n){
 		s.insert(s.begin(), char('0' + n % 10));
 		n /= 10;
 	}
@@ -270,13 +271,22 @@ bigint::bigint(const bigint &o) : s(o.s) {}
 bigint::~bigint() {}
 
 const std::string &bigint::str() const { return s; }
-bigint &bigint::operator=(const bigint &o) { s = o.s; return *this; }
+bigint &bigint::operator=(const bigint &o){
+	s = o.s;
+	return *this;
+}
 //add
-bigint bigint::operator+(const bigint &o) const { bigint r(*this); return r += o; }
-bigint &bigint::operator+=(const bigint &o) {
+bigint bigint::operator+(const bigint &o) const{
+	bigint r(*this);
+	return r += o;
+}
+
+bigint &bigint::operator+=(const bigint &o){
 	std::string r;
-	int i = s.size() - 1, j = o.s.size() - 1, c = 0;
-	while (i >= 0 || j >= 0 || c) {
+	int i = s.size() - 1;
+	int j = o.s.size() - 1;
+	int c = 0;
+	while (i >= 0 || j >= 0 || c){
 		int a = i >= 0 ? s[i--] - '0' : 0;
 		int b = j >= 0 ? o.s[j--] - '0' : 0;
 		r.insert(r.begin(), char('0' + (a + b + c) % 10));
@@ -286,21 +296,45 @@ bigint &bigint::operator+=(const bigint &o) {
 	return *this;
 }
 //incr
-bigint bigint::operator++(int) { bigint r(*this); ++*this; return r; }
+bigint bigint::operator++(int){
+	bigint r(*this);
+	++*this;
+	return r;
+}
+
 bigint &bigint::operator++() { return *this += 1; }
-//with n
-bigint bigint::operator<<(unsigned int n) const { bigint r(*this); return r <<= n; }
-bigint &bigint::operator<<=(unsigned int n) { if (s != "0") s.append(n, '0'); return *this; }
-//with obj
-bigint bigint::operator>>(const bigint &o) const { bigint r(*this); return r >>= o; }
-bigint &bigint::operator>>=(const bigint &o) {
+//shift
+bigint bigint::operator<<(const bigint &o) const{
+	bigint r(*this);
+	return r <<= o;
+}
+
+bigint &bigint::operator<<=(const bigint &o){
 	unsigned long n = 0;
-	for (size_t i = 0; i < o.s.size(); ++i) {
+	for (size_t i = 0; i < o.s.size(); ++i)
 		n = n * 10 + o.s[i] - '0';
-		if (n >= s.size()) { s = "0"; return *this; }
+	if (s != "0")
+		s.append(n, '0');
+	return *this;
+}
+//with obj
+bigint bigint::operator>>(const bigint &o) const{
+	bigint r(*this);
+	return r >>= o;
+}
+
+bigint &bigint::operator>>=(const bigint &o){
+	unsigned long n = 0;
+	for (size_t i = 0; i < o.s.size(); ++i){
+		n = n * 10 + o.s[i] - '0';
+		if (n >= s.size()){
+			s = "0";
+			return *this;
+		}
 	}
 	s.erase(s.size() - n);
-	if (s.empty()) s = "0";
+	if (s.empty())
+		s = "0";
 	return *this;
 }
 //bool

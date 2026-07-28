@@ -67,7 +67,7 @@
 #include <iostream>
 #include <string>
 
-class bigint {
+class bigint{
 	std::string s;
 	public:
 		bigint(unsigned int n = 0);
@@ -85,9 +85,9 @@ class bigint {
 		bigint operator++(int);
 		bigint &operator++();
 		
-		//with num
-		bigint operator<<(unsigned int n) const;
-		bigint &operator<<=(unsigned int n);
+		//shift
+		bigint operator<<(const bigint &o) const;
+		bigint &operator<<=(const bigint &o);
 		
 		// with obj
 		bigint operator>>(const bigint &o) const;
