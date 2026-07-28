@@ -1,10 +1,8 @@
 #include "vect2.hpp"
 
 vect2	&vect2::operator=(const vect2 &o){
-	if (this != &o){
-		x = o.x;
-		y = o.y;
-	}
+	x = o.x;
+	y = o.y;
 	return (*this);
 }
 
@@ -21,8 +19,7 @@ vect2	&vect2::operator++(){
 
 vect2	vect2::operator++(int){
 	vect2	c(*this);
-	++x;
-	++y;
+	++(*this);
 	return (c);
 }
 
@@ -34,8 +31,7 @@ vect2	&vect2::operator--(){
 
 vect2	vect2::operator--(int){
 	vect2	c(*this);
-	--x;
-	--y;
+	--(*this);
 	return (c);
 }
 
