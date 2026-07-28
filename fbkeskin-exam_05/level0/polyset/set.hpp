@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#pragma once
+
 #include "searchable_bag.hpp"
 
 // "wrapping" (sarama) işlemi, genellikle bir sınıfın (class) başka bir sınıfı,
@@ -19,20 +21,17 @@ class set
 {
 	private:
 		searchable_bag& bag;
+		set();                          // interdits : une reference ne peut
+		set(const set&);                // etre ni construite par defaut,
+		set& operator=(const set&);     // ni copiee, ni reassignee.
 	public:
-		set() = delete;
-		set(const set& source) = delete;
-		set& operator=(const set& source) = delete;
-		set(searchable_bag& s_bag);
-
-		bool has(int) const;
-		void insert (int);
-		void insert (int *, int);
-		void print() const;
-		void clear();
-
-		const searchable_bag& get_bag();
-
+		set(searchable_bag& b);
 		~set();
 
+		void insert(int);
+		void insert(int*, int);
+		bool has(int) const;
+		void print() const;
+		void clear();
+		const searchable_bag& get_bag() const;
 };
