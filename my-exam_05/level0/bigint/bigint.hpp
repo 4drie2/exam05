@@ -20,11 +20,10 @@ class bigint {
         bigint operator++(int);
         bigint &operator++();
 
-        //with num
-        bigint operator<<(unsigned int n) const;
-        bigint &operator<<=(unsigned int n);
+        //shift
+        bigint operator<<(const bigint &o) const;
+        bigint &operator<<=(const bigint &o);
 
-        //with obj
         bigint operator>>(const bigint &o) const;
         bigint &operator>>=(const bigint &o);
 
@@ -37,4 +36,4 @@ class bigint {
         bool operator!=(const bigint &o) const;
 };
 
-std::ostream &operator<<(std::ostream &os, const bigint &n);
+std::ostream &operator<<(std::ostream &os, const bigint &o);
