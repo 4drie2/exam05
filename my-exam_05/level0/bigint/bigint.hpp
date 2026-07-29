@@ -1,5 +1,4 @@
 #pragma once
-
 #include <iostream>
 #include <string>
 
@@ -17,7 +16,7 @@ class bigint {
         bigint operator+(const bigint &o) const;
         bigint &operator+=(const bigint &o);
 
-        //incr
+        //increment
         bigint operator++(int);
         bigint &operator++();
 
@@ -26,16 +25,16 @@ class bigint {
         bigint &operator<<=(unsigned int n);
 
         //with obj
-        bigint operator>>(const bigint &o)const;
+        bigint operator>>(const bigint &o) const;
         bigint &operator>>=(const bigint &o);
 
         //bool
-        bool operator<(const bigint &o)const;
-        bool operator<=(const bigint &o)const;
-        bool operator>(const bigint &o)const;
-        bool operator>=(const bigint &o)const;
-        bool operator==(const bigint &o)const;
-        bool operator!=(const bigint &o)const;
+        bool operator<(const bigint &o) const;
+        bool operator<=(const bigint &o) const;
+        bool operator>(const bigint &o) const;
+        bool operator>=(const bigint &o) const;
+        bool operator==(const bigint &o) const;
+        bool operator!=(const bigint &o) const;
 };
 
 std::ostream &operator<<(std::ostream &os, const bigint &n);

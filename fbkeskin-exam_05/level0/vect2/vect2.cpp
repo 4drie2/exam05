@@ -14,9 +14,9 @@ int	&vect2::operator[](int i) { return (i == 0 ? x : y); }
 
 // Increments & Decrements
 vect2	vect2::operator++(int){
-	vect2	c(*this);
+	vect2	r(*this);
 	++(*this);
-	return (c);
+	return (r);
 }
 
 vect2	&vect2::operator++(){
@@ -26,9 +26,9 @@ vect2	&vect2::operator++(){
 }
 
 vect2	vect2::operator--(int){
-	vect2	c(*this);
+	vect2	r(*this);
 	--(*this);
-	return (c);
+	return (r);
 }
 
 vect2	&vect2::operator--(){
