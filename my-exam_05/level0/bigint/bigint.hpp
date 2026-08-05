@@ -1,17 +1,18 @@
 #pragma once
-#include <iostream>
-#include <string>
 
-class bigint {
+#include <string>
+#include <iostream>
+
+class bigint{
     std::string s;
-    public :
+    public:
         bigint(unsigned int n = 0);
         bigint(const bigint &o);
         ~bigint();
-
+        
         const std::string &str() const;
         bigint &operator=(const bigint &o);
-
+        
         //add
         bigint operator+(const bigint &o) const;
         bigint &operator+=(const bigint &o);
@@ -23,17 +24,16 @@ class bigint {
         //shift
         bigint operator<<(const bigint &o) const;
         bigint &operator<<=(const bigint &o);
-
         bigint operator>>(const bigint &o) const;
         bigint &operator>>=(const bigint &o);
 
         //bool
-        bool operator<(const bigint &o) const;
-        bool operator<=(const bigint &o) const;
-        bool operator>(const bigint &o) const;
-        bool operator>=(const bigint &o) const;
-        bool operator==(const bigint &o) const;
-        bool operator!=(const bigint &o) const;
+		bool operator<(const bigint &o) const;
+		bool operator<=(const bigint &o) const;
+		bool operator>(const bigint &o) const;
+		bool operator>=(const bigint &o) const;
+		bool operator==(const bigint &o) const;
+		bool operator!=(const bigint &o) const;
 };
 
 std::ostream &operator<<(std::ostream &os, const bigint &o);

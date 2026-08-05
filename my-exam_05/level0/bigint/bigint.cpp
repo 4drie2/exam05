@@ -1,19 +1,21 @@
 #include "bigint.hpp"
 
-bigint::bigint(unsigned int n) {
-    if (!n) s = "0";
-    while(n){
+bigint::bigint(unsigned int n){
+    if (!n) s= "0";
+    while (n){
         s.insert(s.begin(), char('0' + n%10));
-        n /=10;
+        n =/10;
     }
 }
 bigint::bigint(const bigint &o) : s(o.s) {}
 bigint::~bigint() {}
+
 const std::string &bigint::str() const {return s;}
 bigint &bigint::operator=(const bigint &o) {
     s = o.s;
     return *this;
 }
+
 //add
 bigint bigint::operator+(const bigint &o) const {
     bigint r(*this);
@@ -21,14 +23,14 @@ bigint bigint::operator+(const bigint &o) const {
 }
 bigint &bigint::operator+=(const bigint &o) {
     std::string r;
-    int i = s.size() -1;
+    int i = s.size() - 1;
     int j = o.s.size() -1;
     int c = 0;
-    while(i>=0 || j>=0 ||c){
+    while(i>=0 || j>=0 || c){
         int a = i>=0 ? s[i--] - '0' : 0;
         int b = j>=0 ? o.s[j--] - '0' : 0;
         r.insert(r.begin(), char('0' + (a+b+c)%10));
-        c =(a+b+c)/10;
+        c = (a+b+c)/10;
     }
     s = r;
     return *this;
@@ -39,27 +41,28 @@ bigint bigint::operator++(int) {
     ++*this;
     return r;
 }
-bigint &bigint::operator++(){return *this+=1;}
+bigint &bigint::operator++() {return *this+=1; }
 //shift
-bigint bigint::operator<<(const bigint &o) const{
+bigint bigint::operator<<(const bigint &o) const {
     bigint r(*this);
-    return r<<=o;
+    return r <<= o;
 }
-bigint &bigint::operator<<=(const bigint &o){
-    unsigned long n = 0;
-    for (size_t i = 0; i < o.s.size(); ++i)
+bigint &bigint::operator<<=(const bigint &o) {
+    unsigned long n =0;
+    for (size_t i = 0; i < o.s.size(); ++i){
         n = n*10 + o.s[i] - '0';
+    }
     if (s != "0")
         s.append(n, '0');
     return *this;
 }
 bigint bigint::operator>>(const bigint &o) const {
     bigint r(*this);
-    return r>>=o;
+    return r >>=o;
 }
-bigint &bigint::operator>>=(const bigint &o){
-    unsigned long n = 0;
-    for (size_t i =0; i < o.s.size(); ++i){
+bigint &bigint::operator>>=(const bigint &o) {
+    unsigned long n =0;
+    for (size_t i = 0; i < o.s.size(); ++i){
         n = n*10 + o.s[i] - '0';
         if (n>=s.size()){
             s = "0";
@@ -79,4 +82,4 @@ bool bigint::operator>=(const bigint &o) const { return !(*this < o); }
 bool bigint::operator==(const bigint &o) const { return s == o.s; }
 bool bigint::operator!=(const bigint &o) const { return s != o.s; }
 
-std::ostream &operator<<(std::ostream &os, const bigint &o) { return os << o.str(); }
+std::ostream &operator<<(std::ostream &os, const bigint &o) {return os << o.str(); }
