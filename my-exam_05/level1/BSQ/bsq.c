@@ -19,6 +19,18 @@ void clean(t_map *m){
 	free(m->g);
 }
 
+int load(FILE *fp, t_map *m){
+	char *l = NULL;
+	size_t cap = 0;
+	char nl;
+	int n;
+
+	if (fscanf(fp, "%d %c %c %c%c", &m->h, &m->e, &m->o, %m->f, &nl) != 5
+		|| nl != '\n' || m->h < 1
+		|| m->e == m->o || m->e == m->f || m->o == m->f)
+		return 0;
+}
+
 void solve(t_map *m){
 	int *d = calloc(m->h * m->w, sizeof(int));
 	int best  0, bi=0, bj=0;
