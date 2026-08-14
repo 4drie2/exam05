@@ -14,8 +14,8 @@ int	min3(int a, int b, int c){
 }
 
 void	clean(t_map *m){
-	for (int i = 0; m->g && i < m->h && m->g[i]; ++i)
-		free(m->g[i]);
+	for (int y = 0; m->g && y < m->h && m->g[y]; ++y)
+		free(m->g[y]);
 	free(m->g);
 }
 
@@ -32,49 +32,49 @@ int	load(FILE *fp, t_map *m){
 	m->g = calloc(m->h, sizeof(char *));
 	if (!m->g)
 		return (0);
-	for (int i = 0; i < m->h; ++i){
+	for (int y = 0; y < m->h; ++y){
 		n = getline(&l, &cap, fp);
 		if (n < 2 || l[n - 1] != '\n')
 			return (free(l), 0);
-		m->g[i] = l;
+		m->g[y] = l;
 		l = NULL;
 		cap = 0;
 		--n;
-		if (i == 0)
+		if (y == 0)
 			m->w = n;
 		if (n != m->w)
 			return (0);
-		for (int j = 0; j < n; ++j)
-			if (m->g[i][j] != m->e && m->g[i][j] != m->o)
+		for (int x = 0; x < n; ++x)
+			if (m->g[y][x] != m->e && m->g[y][x] != m->o)
 				return (0);
-		m->g[i][n] = 0;
+		m->g[y][n] = 0;
 	}
 	return (1);
 }
 
 void	solve(t_map *m){
 	int	*d = calloc(m->h * m->w, sizeof(int));
-	int	best = 0, bi = 0, bj = 0;
+	int	best = 0, by = 0, bx = 0;
 
 	if (!d)
 		return ;
-	for (int i = 0; i < m->h; ++i)
-		for (int j = 0; j < m->w; ++j){
+	for (int y = 0; y < m->h; ++y)
+		for (int x = 0; x < m->w; ++x){
 			int	v = 0;
-			if (m->g[i][j] != m->o)
-				v = (i && j) ? min3(d[(i - 1) * m->w + j],
-					d[i * m->w + j - 1], d[(i - 1) * m->w + j - 1]) + 1 : 1;
-			d[i * m->w + j] = v;
+			if (m->g[y][x] != m->o)
+				v = (y && x) ? min3(d[(y - 1) * m->w + x],
+					d[y * m->w + x - 1], d[(y - 1) * m->w + x - 1]) + 1 : 1;
+			d[y * m->w + x] = v;
 			if (v > best){
 				best = v;
-				bi = i;
-				bj = j;
+				by = y;
+				bx = x;
 			}
 		}
 	free(d);
-	for (int i = bi - best + 1; i <= bi; ++i)
-		for (int j = bj - best + 1; j <= bj; ++j)
-			m->g[i][j] = m->f;
+	for (int y = by - best + 1; y <= by; ++y)
+		for (int x = bx - best + 1; x <= bx; ++x)
+			m->g[y][x] = m->f;
 }
 
 int	main(int argc, char **argv){
@@ -88,8 +88,8 @@ int	main(int argc, char **argv){
 	}
 	if (load(fp, &m)){
 		solve(&m);
-		for (int i = 0; i < m.h; ++i)
-			fprintf(stdout, "%s\n", m.g[i]);
+		for (int y = 0; y < m.h; ++y)
+			fprintf(stdout, "%s\n", m.g[y]);
 	}
 	else
 		fprintf(stdout, "Error: invalid map\n");

@@ -29,6 +29,27 @@ int load(FILE *fp, t_map *m){
 		|| nl != '\n' || m->h < 1
 		|| m->e == m->o || m->e == m->f || m->o == m->f)
 		return 0;
+	m->g = calloc(m->h, sizeof(char *));
+	if (!m->g)
+		return 0;
+	for (int i=0; i < m->h; ++i){
+		n = getline(&l, &cap, fd);
+		if (n < 2 || l[n-1] != '\n')
+			return (free(l), 0);
+		m->g[i] = l;
+		l = NULL;
+		cap = 0;
+		--n;
+		if (i == 0)
+			m->w = n;
+		if (n != m->w)
+			return 0;
+		for (int j=0; j<n; ++j)
+			if (m->g[i][j] != m->e && m->g[i][j] != m->o)
+				return 0;
+		m->g[i][n] =0;
+	}
+	return 1;
 }
 
 void solve(t_map *m){
