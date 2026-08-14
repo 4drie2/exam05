@@ -47,7 +47,7 @@ int	main(int ac, char **av){
 		return (1);
 
 	int	w = atoi(av[1]), h = atoi(av[2]), it = atoi(av[3]);
-	if (w <= 0 || h <= 0)
+	if (w <= 0 || h <= 0 || it < 0)
 		return (1);
 
 	char	*b = calloc(w * h, 1), *n = calloc(w * h, 1), *t;
