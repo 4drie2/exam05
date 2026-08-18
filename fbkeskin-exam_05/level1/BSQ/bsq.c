@@ -77,12 +77,12 @@ void	solve(t_map *m){
 			m->g[y][x] = m->f;
 }
 
-int	main(int argc, char **argv){
+int	main(int ac, char **av){
 	t_map	m = {0, 0, 0, 0, 0, NULL};
 	FILE	*fp = stdin;
 
-	if (argc > 1){
-		fp = fopen(argv[1], "r");
+	if (ac > 1){
+		fp = fopen(av[1], "r");
 		if (!fp)
 			return (fprintf(stdout, "Error: cannot open file\n"), 1);
 	}
