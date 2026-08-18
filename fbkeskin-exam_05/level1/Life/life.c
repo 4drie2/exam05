@@ -1,4 +1,6 @@
-#include "life.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 int	count(char *b, int w, int h, int x, int y){
 	int	n = 0;

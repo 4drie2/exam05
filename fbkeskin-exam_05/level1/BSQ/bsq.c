@@ -1,4 +1,6 @@
-#include "bsq.h"
+#define _GNU_SOURCE
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct s_map{
 	int	h, w;
